@@ -1,2 +1,2 @@
 // Databricks notebook source
-print("this is version 1.5")
+print("this is version 1.6")
