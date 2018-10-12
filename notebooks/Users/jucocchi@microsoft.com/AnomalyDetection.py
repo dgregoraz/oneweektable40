@@ -53,3 +53,36 @@ display(df)
 
 # COMMAND ----------
 
+# Select only the columns we will use for our model
+df = df.select("normHum", "normPress", "normTemp")
+
+# COMMAND ----------
+
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.covariance import EllipticEnvelope
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_moons, make_blobs
+
+n_samples = 100000
+sample_data = np.array(df.take(n_samples))
+n_features = 3
+
+clf = EllipticEnvelope()
+clf.fit(sample_data)
+
+# COMMAND ----------
+
+# number of outlier values
+pred = clf.predict(sample_data)
+sum(pred == -1)
+
+# COMMAND ----------
+
+# continuous output of decision_function
+decision = clf.decision_function(sample_data)
+decision.min(), decision.max()
+
+# COMMAND ----------
+
+7
